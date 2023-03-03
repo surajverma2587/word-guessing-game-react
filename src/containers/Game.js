@@ -16,13 +16,23 @@ export const Game = ({ category }) => {
   const [characters, setCharacters] = useState(maskedCharacters);
   const [strikes, setStrikes] = useState(maxStrikes);
 
+  const handleCheck = (letter) => {
+    const letterToCheck = letter.toUpperCase();
+
+    const existsInWord = word.includes(letterToCheck);
+
+    if (!existsInWord) {
+      setStrikes((strikes) => strikes - 1);
+    }
+  };
+
   return (
     <Box>
       <Strikes strikes={strikes} maxStrikes={maxStrikes} />
 
       <Word characters={characters} />
 
-      <Keyboard />
+      <Keyboard handleCheck={handleCheck} />
     </Box>
   );
 };
